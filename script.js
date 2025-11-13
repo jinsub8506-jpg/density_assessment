@@ -2,8 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- (A) 중앙 데이터 및 상태 관리 ---
 
-    // ★ [수정] 25g 추 항목 삭제
+    // ★ [수정] 4개 물체 플레이스홀더 추가
     const objectProperties = {
+        // (질량과 부피 설정)
+        'iron-small': { mass: 79.0, volume: 10.0 },
+        'iron-large': { mass: 158.0, volume: 20.0 },
+        'alu-small':  { mass: 27.0, volume: 10.0 },
+        'alu-large':  { mass: 54.0, volume: 20.0 },
         'sus-50g':   { mass: 50.0, volume: 6.67 },  // 50 / 7.5
         'sus-100g':  { mass: 100.0, volume: 13.33 }, // 100 / 7.5
         'brass-50g': { mass: 50.0, volume: 5.88 },  // 50 / 8.5
@@ -49,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 각 물체의 '고향' 위치를 저장할 Map
     const objectHomeMap = new Map();
+    // ★ (수정 불필요) querySelectorAll이 새 물체를 자동으로 포함합니다.
     document.querySelectorAll('#object-pool .object-item').forEach(obj => {
         objectHomeMap.set(obj, obj.parentElement); 
     });
@@ -59,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function getProperties(element) {
         if (!element) return null;
         const type = element.dataset.type;
+        // ★ (수정 불필요) objectProperties에서 새 키를 찾아 반환합니다.
         return objectProperties[type] || null;
     }
 
@@ -227,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
         activeObject.classList.add('dragging'); 
 
         activeObject.style.left = `${coords.x - offsetX}px`;
-        activeObject.style.top = `${coords.y - offsetY}px`;
+        activeObject.style.top = `${coords.g - offsetY}px`;
         
         document.addEventListener('mousemove', dragMove);
         document.addEventListener('touchmove', dragMove, { passive: false });
@@ -304,6 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateWaterLevel();
     }
 
+    // ★ (수정 불필요) querySelectorAll이 새 물체를 자동으로 포함합니다.
     draggableObjects.forEach(obj => {
         obj.draggable = false; 
         

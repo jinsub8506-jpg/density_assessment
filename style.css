@@ -6,7 +6,6 @@ body {
   padding: 0;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  /* ★ [수정] flex 관련 속성 제거하여 중앙 정렬 해제 */
   min-height: 100vh;
 }
 
@@ -17,7 +16,6 @@ body {
   align-items: center;
   width: 1000px;
   height: auto;
-  /* ★ [수정] margin: 20px auto; -> margin: 20px; 로 변경하여 좌측 정렬 */
   margin: 20px;
   padding: 20px;
   background-color: #ffffffa0;
@@ -309,9 +307,11 @@ h2 { text-align: center; margin-top: 0; }
   transform: none !important;
 }
 
-/* 추 스타일 - 공통 */
+/* ★ [수정] 추 스타일 - 공통 (iron, alu 추가) */
 .object-item[data-type^="sus-"],
-.object-item[data-type^="brass-"] {
+.object-item[data-type^="brass-"],
+.object-item[data-type^="iron-"],
+.object-item[data-type^="alu-"] {
   border-radius: 5px;
   color: black;
   display: flex;
@@ -322,9 +322,11 @@ h2 { text-align: center; margin-top: 0; }
   box-sizing: border-box;
 }
 
-/* 큰 추(100g) 크기 재정의 (50px -> 70px) */
+/* ★ [수정] 큰 추(100g) 크기 재정의 (iron-large, alu-large 추가) */
 .object-item[data-type="sus-100g"],
-.object-item[data-type="brass-100g"] {
+.object-item[data-type="brass-100g"],
+.object-item[data-type="iron-large"],
+.object-item[data-type="alu-large"] {
   width: 70px;
   height: 70px;
   font-size: 16px;
@@ -345,3 +347,19 @@ h2 { text-align: center; margin-top: 0; }
 }
 .object-item[data-type="brass-50g"]::before { content: ''; }
 .object-item[data-type="brass-100g"]::before { content: ''; }
+
+/* ★ [신규] 철조각 (Iron) - 짙은 회색 */
+.object-item[data-type^="iron-"] {
+  background-color: #5A5A5A;
+  border: 2px solid #333333;
+}
+.object-item[data-type="iron-small"]::before { content: ''; }
+.object-item[data-type="iron-large"]::before { content: ''; }
+
+/* ★ [신규] 알루미늄 (Aluminum) - 밝은 은색 */
+.object-item[data-type^="alu-"] {
+  background-color: #E0E0E0;
+  border: 2px solid #999999;
+}
+.object-item[data-type="alu-small"]::before { content: ''; }
+.object-item[data-type="alu-large"]::before { content: ''; }
